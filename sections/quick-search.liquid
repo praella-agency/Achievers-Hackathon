@@ -1,0 +1,77 @@
+{%- if predictive_search.performed -%}
+  {% assign results_count = predictive_search.resources.queries.size
+    | plus: predictive_search.resources.collections.size
+    | plus: predictive_search.resources.products.size
+  %}
+  <div class="custome_scrollbar">
+  <div id="predictive-search-results" class="" role="listbox">
+    {% if results_count > 0 %}
+      <div class="row no-gutter justify-content-center">
+        <div class="col-12">
+          {%- if predictive_search.resources.products.size > 0 -%}
+            <div class="predictive-search__products">
+              <div id="results-products" class="results-list list-unstyled" role="group">
+                {%- for product in predictive_search.resources.products -%}
+                  {% capture placeholderImage %}product-apparel-{{ forloop.index }}{% endcapture %}
+                  <div class="predictive-search-item" role="option" data-add-product="{{ product.selected_or_first_available_variant.id }}">
+                    <div class="p-2 gap-1 d-flex align-items-center search_product" add-quick-btn>
+                      <div
+                        class="d-block flex-shrink-0 predictive-search__image overflow-hidden"
+                        tabindex="-1"
+                        aria-label="{{ product.title }}"
+                        title="{{ product.title }}"
+                      >
+                        {%- if product.featured_media != blank -%}
+                          <img
+                            src="{{ product.featured_media | image_url: width: 300 }}"
+                            alt="{{ product.featured_media.alt | escape }}"
+                            width="50"
+                            height="{{ 50 | divided_by: product.featured_media.preview_image.aspect_ratio | round }}"
+                          >
+                        {%- else -%}
+                          <img
+                            src="{{ product.featured_image | img_url: '120x120', crop: 'center' }}"
+                            alt="{{ product.title | escape }}"
+                            class="img-fluid"
+                            width="60"
+                            height="60"
+                            loading="lazy"
+                          >
+                        {%- endif -%}
+                      </div>
+                  
+                      <div class="ps-2 predictive-search__item-content">
+                        <a
+                          href="{{ product.url }}"
+                          class="fs-sm fw-medium item--title lh-1_3 text-black d-block mb-1"
+                          title="{{ product.title }}"
+                        >
+                          {{ product.title }}
+                        </a>
+                  
+                        <div class="fw-medium lh-md ls-4 mt-1 sku-wrapper text-gray-500 prod-sku">
+                          {{ product.selected_or_first_available_variant.sku }}
+                        </div>
+                  
+                        <div class="fs-md fw-black lh-1 lh-md mt-2 price-wrapper">
+                          <span class="actual-price money fs-md">
+                            {{ product.selected_or_first_available_variant.price | money }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {% else %}
+      <div class="no-results text-center fw-bold">
+        <p class="m-0">{{ 'general.search.predictive.no_results' | t: searchTerm: predictive_search.terms }}</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{%- endif -%}

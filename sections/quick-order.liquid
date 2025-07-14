@@ -1,0 +1,233 @@
+
+<section
+  class="content-pages {{ section.settings.section_top_spacing }} {{ section.settings.section_bottom_spacing }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="container">
+    <div class="justify-content-center row">
+      <div class="col-12 col-md-10">
+        <div class="bg-white p-4 p-lg-8 rounded-1">
+          {% content_for 'blocks' %}
+          <div class="quick-order" id="quick_order">
+            <div class="row">
+              <form action="/cart" method="post" class="quick-form">
+                <div class="col-12">
+                  <div class="border-bottom border-gray-80 cart-header pb-3 pt-5 pt-lg-8">
+                    <div class="align-items-center fs-sm fw-bold lh-1_2 ls-4 row text-uppercase">
+                      <div class="col-6 col-md-auto col1">{{ 'customer.company.part_name_or_number' | t }}</div>
+                      <div class="col col-md-auto col2 d-none d-md-block">{{ 'customer.company.price' | t }}</div>
+                      <div class="col-3 col-md-auto col3 d-none d-md-block">{{ 'customer.company.quantity' | t }}</div>
+                      <div class="col-6 col-md-auto col4 text-end text-md-start">
+                        {{ 'customer.company.total' | t }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cart-body">
+                    <div class="cart-header cart-items">
+                      <div class="border-bottom border-gray-80 cart-header cart-item d-none" data-duplicate>
+                        <div class="row align-items-center">
+                          <div class="cart-product-img col-12 col-sm-6 col-lg-5 pe-lg-8" data-result>
+                            <quick-order class="search-modal__form position-relative d-block">
+                              <form
+                                action="{{ routes.search_url }}"
+                                method="get"
+                                role="search"
+                                class="search search-modal__form"
+                                onsubmit="return false"
+                              >
+                                {%- capture searchType -%}{%- if section.settings.enable_search_product -%}product,{%- endif -%}{%- if section.settings.enable_search_article -%}article,{%- endif -%}{%- if section.settings.enable_search_page -%}page{%- endif -%}{%- endcapture -%}
+                                <div class="position-relative d-flex align-items-center gap-2">
+                                  <label class="visually-hidden" for="Search-In-Modal">Search</label>
+                                  <input
+                                    class="border-gray-70 form-control grey-control ps-8"
+                                    id="Search-In-Modal"
+                                    type="search"
+                                    name="q"
+                                    aria-label="{{ 'customer.company.quick_search' | t }}"
+                                    title="{{ 'customer.company.quick_search' | t }}"
+                                    placeholder="{{ 'customer.company.quick_search' | t }}"
+                                  >
+                                  <select name="search_type" class="form-select ms-2" aria-label="Search type" data-search-type>
+                                    <option value="sku" selected>SKU</option>
+                                    <option value="title">Title</option>
+                                    <option value="tag">Tag</option>
+                                    <option value="product-type">Product Type</option>
+                                    <option value="vendor">Vendor</option>
+                                    <option value="upc">UPC</option>
+                                  </select>
+                                  <button class="field__button p-0 text-black" aria-label="Search parts, products, etc" type="button">
+                                    <svg aria-hidden="true" focusable="false" style="width:16px;height:16px;">
+                                      <use href="#icon-search"></use>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </form>
+                              <div
+                                class="predictive-search predictive-search--header mb-3 mt-1 px-1 border border-gray-80 rounded-1"
+                                tabindex="-1"
+                                data-quickorder-search
+                              >
+                                <div class="predictive-search__loading-state">
+                                  <svg
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    role="presentation"
+                                    class="spinner-border"
+                                    viewBox="0 0 66 66"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                  </svg>
+                                </div>
+                              </div>
+                            </quick-order>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="border-bottom border-gray-80 cart-header cart-item" data-closest-target>
+                        <div class="row align-items-center">
+                          <div class="cart-product-img col-12 col-sm-6 col-lg-5 pe-lg-8" data-result>
+                            <quick-order class="search-modal__form position-relative d-block">
+                              <form
+                                action="{{ routes.search_url }}"
+                                method="get"
+                                role="search"
+                                class="search search-modal__form"
+                                onsubmit="return false"
+                              >
+                                {%- capture searchType -%}{%- if section.settings.enable_search_product -%}product,{%- endif -%}{%- if section.settings.enable_search_article -%}article,{%- endif -%}{%- if section.settings.enable_search_page -%}page{%- endif -%}{%- endcapture -%}
+                                <div class="position-relative d-flex align-items-center gap-2">
+                                  <label class="visually-hidden" for="Search-In-Modal">Search</label>
+                                  <input
+                                    class="border-gray-70 form-control grey-control ps-8"
+                                    id="Search-In-Modal"
+                                    type="search"
+                                    name="q"
+                                    aria-label="{{ 'customer.company.quick_search' | t }}"
+                                    title="{{ 'customer.company.quick_search' | t }}"
+                                    placeholder="{{ 'customer.company.quick_search' | t }}"
+                                  >
+                                  <select name="search_type" class="form-select ms-2" aria-label="Search type">
+                                    <option value="sku">SKU</option>
+                                    <option value="title">Title</option>
+                                    <option value="tag">Tag</option>
+                                    <option value="upc">UPC</option>
+                                  </select>
+                                  <button class="field__button p-0 text-black" aria-label="Search parts, products, etc" type="button">
+                                    <svg aria-hidden="true" focusable="false" style="width:16px;height:16px;">
+                                      <use href="#icon-search"></use>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </form>
+                              <div
+                                class="predictive-search predictive-search--header mb-3 mt-1 px-1 border border-gray-80 rounded-1"
+                                tabindex="-1"
+                                data-predictive-search
+                              >
+                                <div class="predictive-search__loading-state">
+                                  <svg
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    role="presentation"
+                                    class="spinner-border"
+                                    viewBox="0 0 66 66"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                  </svg>
+                                </div>
+                              </div>
+                            </quick-order>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="border-bottom border-gray-80 py-4 py-lg-8">
+                      <button
+                        type="button"
+                        name="btn"
+                        aria-label="button"
+                        class="btn btn-outline-dark"
+                        data-add-more
+                      >
+                        <span class="add-text"> + Add New Line </span>
+                        <span class="spinner-border"></span>
+                      </button>
+                    </div>
+
+                    <div class="align-items-center d-flex flex-wrap gap-4 gap-lg-8 justify-content-end pt-4 pt-lg-8">
+                      <div class="fs-20 fw-semibold lh-1_2 d-flex gap-2">
+                        Order Total: <span class="fw-black" data-total-order>$0.00</span>
+                      </div>
+                      <button
+                        type="submit"
+                        name="btnSubmit"
+                        aria-label="submit"
+                        class="btn btn-primary"
+                        data-add-quick-btn
+                      >
+                        <span class="add-text"> Continue to checkout </span>
+                        <span class="spinner-border"></span>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quick Order",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "fluid_layout",
+      "label": "Full Width Layout?",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "section_top_spacing",
+      "label": "Top Spacing",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "section-spacing-top-sm", "label": "Small" },
+        { "value": "section-spacing-top-md", "label": "Medium" },
+        { "value": "section-spacing-top-lg", "label": "Large" }
+      ],
+      "default": "section-spacing-top-sm"
+    },
+    {
+      "type": "select",
+      "id": "section_bottom_spacing",
+      "label": "Bottom Spacing",
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "section-spacing-bottom-sm", "label": "Small" },
+        { "value": "section-spacing-bottom-md", "label": "Medium" },
+        { "value": "section-spacing-bottom-lg", "label": "Large" }
+      ],
+      "default": "section-spacing-bottom-sm"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quick Order"
+    }
+  ]
+}
+{% endschema %}
