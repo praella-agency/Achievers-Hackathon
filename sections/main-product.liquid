@@ -724,13 +724,6 @@
   </div>
 </product-info>
 
-{% if product.metafields.custom.quantity_breaks %}
-  <script id="quantity-breaks-data" type="application/json">
-    {{ product.metafields.custom.quantity_breaks.value | json }}
-  </script>
-{% endif %}
-
-
 {% schema %}
 {
   "name": "t:sections.main-product.name",
