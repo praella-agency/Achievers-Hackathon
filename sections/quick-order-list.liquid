@@ -26,10 +26,10 @@
   show_sku: section.settings.show_sku
 %}
 
-
+{{ product.metafields.custom.restricted_provinces.value | json }}
 
 <script>
-window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.values }}';
+window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.value }}';
 fetch('https://ipapi.co/json')
   .then(res => res.json())
   .then(data => {
