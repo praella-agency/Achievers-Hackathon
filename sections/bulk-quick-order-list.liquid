@@ -10,7 +10,15 @@
   <style>.quick-order-list__contents { display: none !important; }</style>
 {% endif %}
 
-
+<script>
+fetch('https://ipapi.co/json')
+  .then(res => res.json())
+  .then(data => {
+    const province = data.region_code; // e.g., "ON"
+    window.customerProvince = province;
+    // Now use this to compare with product metafield
+  });
+</script>
 
 {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
 
