@@ -35,25 +35,12 @@ fetch('https://ipapi.co/json')
   .then(data => {
     const province = data.region_code; // e.g., "ON"
     window.customerProvince = province;
-    console.log(window.customerProvince, 'checkkkkk')
+    console.log(window.customerProvince, window.productRestrictedPro)
+    if (window.productRestrictedPro.indexOf(province) > -1) {
+      console.log(window.customerProvince, window.productRestrictedPro)
+    }
     // Now use this to compare with product metafield
   });
-</script>
-
-<script>
-  window.customerProvince = {% if customer %}"{{ customer.default_address.province_code }}"{% else %}null{% endif %};
-</script>
-
-<script>
-  if (!window.customerProvince) {
-    fetch('/apps/geo/check-location')
-      .then(res => res.json())
-      .then(data => {
-        window.customerProvince = data.region_code;
-    console.log(window.customerProvince, 'checkkkkkinnnn')
-        // Now act on this value
-      });
-  }
 </script>
 
 {% assign restricted = false %}
