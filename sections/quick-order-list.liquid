@@ -23,7 +23,7 @@
 
 <script>
   // Convert comma-separated string metafield to array
-  window.productRestrictedPro = {{ product.metafields.custom.restricted_provinces.value }};
+  window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.value }}';
 
   fetch('https://ipapi.co/json')
     .then(res => res.json())
