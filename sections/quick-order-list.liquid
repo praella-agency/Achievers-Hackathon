@@ -26,6 +26,49 @@
   show_sku: section.settings.show_sku
 %}
 
+
+
+<script>
+window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.value }}';
+fetch('https://ipapi.co/json')
+  .then(res => res.json())
+  .then(data => {
+    const province = data.region_code; // e.g., "ON"
+    window.customerProvince = province;
+    console.log(window.customerProvince, 'checkkkkk')
+    // Now use this to compare with product metafield
+  });
+</script>
+
+<script>
+  window.customerProvince = {% if customer %}"{{ customer.default_address.province_code }}"{% else %}null{% endif %};
+</script>
+
+<script>
+  if (!window.customerProvince) {
+    fetch('/apps/geo/check-location')
+      .then(res => res.json())
+      .then(data => {
+        window.customerProvince = data.region_code;
+    console.log(window.customerProvince, 'checkkkkkinnnn')
+        // Now act on this value
+      });
+  }
+</script>
+
+{% assign restricted = false %}
+{% if product.metafields.custom.restricted_provinces contains customer_province %}
+  {% assign restricted = true %}
+{% endif %}
+
+{% if restricted %}
+  <div class="geo-restriction-warning">
+    Sorry, this product is not available in your region ({{ customer_province }}).
+  </div>
+  <style>.quick-order-list__contents { display: none !important; }</style>
+{% endif %}
+
+
 {% schema %}
 {
   "name": "t:sections.quick-order-list.name",
