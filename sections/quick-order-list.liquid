@@ -25,7 +25,7 @@
   window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.value }}';
 
   function checkRestriction(province) {
-    if (restrictedProvinces.indexOf(province) > -1) {
+    if (window.productRestrictedPro.indexOf(province) > -1) {
       console.warn('Restricted province detected:', province);
 
       const form = document.querySelector('.order-form');
