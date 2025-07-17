@@ -27,7 +27,7 @@
 %}
 
 <script>
-  // Convert CSV to array safely
+  // Convert comma-separated string metafield to array
   window.productRestrictedPro = {{ product.metafields.custom.restricted_provinces.value | json }}.split(',').map(p => p.trim());
 
   fetch('https://ipapi.co/json')
@@ -36,17 +36,27 @@
       const province = data.region_code; // e.g., "ON"
       window.customerProvince = province;
 
-      console.log('Detected province:', province);
-      console.log('Restricted provinces:', window.productRestrictedPro);
+      console.log('User Province:', province);
+      console.log('Restricted Provinces:', window.productRestrictedPro);
 
+      // Check if user's province is restricted
       if (window.productRestrictedPro.includes(province)) {
-        console.log('Province is restricted:', province);
-        // e.g. Hide Add to Cart button, show warning
-        document.querySelector('.product-form').style.display = 'none';
-        document.querySelector('.geo-restriction-warning')?.classList.remove('d-none');
+        console.warn('Access restricted for this province:', province);
+
+        // Hide add-to-cart
+        const form = document.querySelector('.product-form');
+        if (form) form.style.display = 'none';
+
+        // Show warning
+        const warning = document.querySelector('.geo-restriction-warning');
+        if (warning) warning.classList.remove('d-none');
       }
+    })
+    .catch(err => {
+      console.error('Geo lookup failed:', err);
     });
 </script>
+
 
 {% assign restricted = false %}
 {% if product.metafields.custom.restricted_provinces contains customer_province %}
