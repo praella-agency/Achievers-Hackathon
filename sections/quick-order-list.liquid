@@ -41,7 +41,7 @@
 
         // Show warning
         const warning = document.querySelector('.geo-restriction-warning');
-        if (warning) warning.classList.remove('d-none');
+        if (warning) warning.style.display = 'block';
       }
     })
     .catch(err => {
