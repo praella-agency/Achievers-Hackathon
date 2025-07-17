@@ -26,7 +26,7 @@
   show_sku: section.settings.show_sku
 %}
 
-{{ product.metafields.custom.restricted_provinces.value | json }}
+{{ product.metafields.custom.restricted_provinces.value | split: ',' }}
 
 <script>
 window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.value }}';
