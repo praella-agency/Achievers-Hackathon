@@ -1,3 +1,17 @@
+{% assign restricted = false %}
+{% if product.metafields.custom.restricted_provinces contains customer_province %}
+  {% assign restricted = true %}
+{% endif %}
+
+{% if restricted %}
+  <div class="geo-restriction-warning">
+    Sorry, this product is not available in your region ({{ customer_province }}).
+  </div>
+  <style>.quick-order-list__contents { display: none !important; }</style>
+{% endif %}
+
+
+
 {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
