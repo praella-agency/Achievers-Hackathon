@@ -33,7 +33,7 @@ fetch('https://ipapi.co/json')
   .then(data => {
     const province = data.region_code; // e.g., "ON"
     window.customerProvince = province;
-    console.log(window.customerProvince, window.productRestrictedPro)
+    console.log(window.customerProvince, JSON.parse(window.productRestrictedPro))
     if (window.productRestrictedPro.includes(province)) {
       console.log(window.customerProvince, window.productRestrictedPro)
     }
