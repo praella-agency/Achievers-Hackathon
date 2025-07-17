@@ -20,11 +20,16 @@
   }
 {%- endstyle -%}
 
-{% render 'quick-order-list',
-  product: product,
-  show_image: section.settings.show_image,
-  show_sku: section.settings.show_sku
-%}
+<div class="order-form">
+  {% render 'quick-order-list',
+    product: product,
+    show_image: section.settings.show_image,
+    show_sku: section.settings.show_sku
+  %}
+</div>
+<div class="geo-restriction-warning" style="display: none;">
+  Access is restricted for this province
+</div>
 
 <script>
   // Convert comma-separated string metafield to array
@@ -36,15 +41,11 @@
       const province = data.region_code; // e.g., "ON"
       window.customerProvince = province;
 
-      console.log('User Province:', province);
-      console.log('Restricted Provinces:', window.productRestrictedPro);
-
       // Check if user's province is restricted
       if (window.productRestrictedPro.includes(province)) {
-        console.warn('Access restricted for this province:', province);
 
         // Hide add-to-cart
-        const form = document.querySelector('.product-form');
+        const form = document.querySelector('.order-form');
         if (form) form.style.display = 'none';
 
         // Show warning
