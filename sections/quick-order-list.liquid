@@ -33,7 +33,7 @@
 
 <script>
   // Convert comma-separated string metafield to array
-  window.productRestrictedPro = {{ product.metafields.custom.restricted_provinces.value | json }};
+  window.productRestrictedPro = {{ product.metafields.custom.restricted_provinces.value }};
 
   fetch('https://ipapi.co/json')
     .then(res => res.json())
@@ -42,7 +42,7 @@
       window.customerProvince = province;
 
       // Check if user's province is restricted
-      if (window.productRestrictedPro.includes(province)) {
+      if (window.productRestrictedPro.indexOf(province) > -1) {
 
         // Hide add-to-cart
         const form = document.querySelector('.order-form');
