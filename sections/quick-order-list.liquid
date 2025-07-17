@@ -22,31 +22,42 @@
 
 
 <script>
-  // Convert comma-separated string metafield to array
+<script>
+  // Get restricted provinces from Liquid (as plain string)
   window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.value }}';
 
-  fetch('https://ipapi.co/json')
-    .then(res => res.json())
-    .then(data => {
-      const province = data.region_code; // e.g., "ON"
-      window.customerProvince = province;
+  function checkRestriction(province) {
+    if (restrictedProvinces.indexOf(province) > -1) {
+      console.warn('Restricted province detected:', province);
 
-      console.log(province)
-      // Check if user's province is restricted
-      if (window.productRestrictedPro.indexOf(province) > -1) {
+      const form = document.querySelector('.order-form');
+      if (form) form.style.display = 'none';
 
-        // Hide add-to-cart
-        const form = document.querySelector('.order-form');
-        if (form) form.style.display = 'none';
+      const warning = document.querySelector('.geo-restriction-warning');
+      if (warning) warning.style.display = 'block';
+    }
+  }
 
-        // Show warning
-        const warning = document.querySelector('.geo-restriction-warning');
-        if (warning) warning.style.display = 'block';
-      }
-    })
-    .catch(err => {
-      console.error('Geo lookup failed:', err);
-    });
+  // Try getting cached province
+  const cachedProvince = localStorage.getItem('shopifyUserProvince');
+  if (cachedProvince) {
+    window.customerProvince = cachedProvince;
+    checkRestriction(cachedProvince);
+  } else {
+    // Fetch via IP API and store in localStorage
+    fetch('https://ipapi.co/json')
+      .then(res => res.json())
+      .then(data => {
+        const province = data.region_code; // e.g., "ON"
+        window.customerProvince = province;
+        localStorage.setItem('shopifyUserProvince', province);
+        checkRestriction(province);
+      })
+      .catch(err => {
+        console.error('Geo lookup failed:', err);
+      });
+  }
+</script>
 </script>
 
 <div class="order-form">
