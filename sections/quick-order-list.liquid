@@ -29,7 +29,7 @@
 
 
 <script>
-window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.value }}';
+window.productRestrictedPro = '{{ product.metafields.custom.restricted_provinces.values }}';
 fetch('https://ipapi.co/json')
   .then(res => res.json())
   .then(data => {
