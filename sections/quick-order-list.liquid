@@ -27,18 +27,25 @@
 %}
 
 <script>
-window.productRestrictedPro = {{ product.metafields.custom.restricted_provinces.value | json }};
-fetch('https://ipapi.co/json')
-  .then(res => res.json())
-  .then(data => {
-    const province = data.region_code; // e.g., "ON"
-    window.customerProvince = province;
-    console.log(window.customerProvince, JSON.stringify(window.productRestrictedPro))
-    if (window.productRestrictedPro.indexOf(province) > 1) {
-      console.log(window.customerProvince, window.productRestrictedPro)
-    }
-    // Now use this to compare with product metafield
-  });
+  // Convert CSV to array safely
+  window.productRestrictedPro = {{ product.metafields.custom.restricted_provinces.value | json }}.split(',').map(p => p.trim());
+
+  fetch('https://ipapi.co/json')
+    .then(res => res.json())
+    .then(data => {
+      const province = data.region_code; // e.g., "ON"
+      window.customerProvince = province;
+
+      console.log('Detected province:', province);
+      console.log('Restricted provinces:', window.productRestrictedPro);
+
+      if (window.productRestrictedPro.includes(province)) {
+        console.log('Province is restricted:', province);
+        // e.g. Hide Add to Cart button, show warning
+        document.querySelector('.product-form').style.display = 'none';
+        document.querySelector('.geo-restriction-warning')?.classList.remove('d-none');
+      }
+    });
 </script>
 
 {% assign restricted = false %}
