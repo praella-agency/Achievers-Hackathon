@@ -1,0 +1,143 @@
+
+/* Upload Sections */
+  
+  .upload-section {
+    background: white;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .upload-section:hover {
+    border-color: #999;
+    background: #f9f9f9;
+  }
+  
+  .upload-section.dragover {
+    border-color: #333;
+    background: #f0f0f0;
+  }
+  
+  .upload-icon {
+    font-size: 2.4rem;
+    color: #999;
+    margin-bottom: 1rem;
+  }
+  
+  .upload-title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
+    margin: 0 0 1rem 0;
+  }
+  
+  .upload-description {
+    font-size: 1.4rem;
+    color: #666;
+    margin: 0 0 1.5rem 0;
+  }
+  
+  .upload-button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .upload-button:hover {
+    background: #555;
+  }
+  
+  .upload-file-types {
+    font-size: 1.2rem;
+    color: #999;
+    margin-top: 1rem;
+  }
+  
+  .uploaded-file {
+    background: #f5f5f5;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+    border: 1px solid #ddd;
+  }
+  
+  /* Cart Footer */
+  .cart-footer-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 3rem;
+  }
+  
+  .cart-summary {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .cart-total-label {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .cart-total-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .cart-tax-note {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    text-align: center;
+    line-height: 1.4;
+  }
+  
+  .cart-checkout-button {
+    width: 100%;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 1.5rem 2rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .cart-checkout-button:hover {
+    background: #555;
+  }
+  
+  .cart-checkout-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }

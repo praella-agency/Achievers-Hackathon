@@ -11,7 +11,7 @@
     "image_banner": {
       "type": "image-banner",
       "settings": {
-        "image": "shopify://shop_images/Image_banner_2x_8.png",
+        "image": "shopify:\/\/shop_images\/Image_banner_2x_8.png",
         "image_overlay_opacity": 20,
         "image_height": "adapt",
         "desktop_content_position": "middle-left",

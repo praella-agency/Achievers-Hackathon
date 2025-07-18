@@ -1,0 +1,85 @@
+{{ 'upload-receipt.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="upload-sections section-{{ section.id }}-padding bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="upload-section" id="tax-exempt-upload">
+          <div class="upload-icon">↑</div>
+          <h3 class="upload-title">Upload Tax exempt</h3>
+          <p class="upload-description">Drag and drop to upload the Tax Exempt file or</p>
+          <button type="button" class="upload-button">CHANGE FILE</button>
+          <input type="file" id="tax-exempt-file" style="display: none;" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif">
+          <p class="upload-file-types">YOU CAN UPLOAD PDF, DOC, DOCX, TXT, JPG, JPEG, PNG, GIF</p>
+          <div id="tax-exempt-uploaded" class="uploaded-file" style="display: none;"></div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="upload-section" id="po-receipt-upload">
+          <div class="upload-icon">↑</div>
+          <h3 class="upload-title">Upload PO Receipt</h3>
+          <p class="upload-description">Drag and drop to upload the PO receipt file or</p>
+          <button type="button" class="upload-button">BROWSE FILE</button>
+          <input type="file" id="po-receipt-file" style="display: none;" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif">
+          <p class="upload-file-types">YOU CAN UPLOAD PDF, DOC, DOCX, TXT, JPG, JPEG, PNG, GIF</p>
+          <div id="po-receipt-uploaded" class="uploaded-file" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+  
+</div>
+
+{% schema %}
+{
+  "name": "Upload receipt",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Upload receipt",
+      "category": "Cart"
+    }
+  ]
+}
+{% endschema %}
