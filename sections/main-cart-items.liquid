@@ -28,10 +28,17 @@
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
     <div class="title-wrapper-with-link">
+     <div>
       <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
       <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
         {{- 'general.continue_shopping' | t -}}
       </a>
+     </div>
+     <div>
+      <button type="submit" class="button button--secondary">
+        Import CSV
+      </button>
+     </div>
     </div>
 
     <div class="cart__warnings">
@@ -434,6 +441,10 @@
               </tbody>
             </table>
           {%- endif -%}
+
+          
+
+
         </div>
       </div>
 
@@ -447,6 +458,8 @@
       >
         {{ 'accessibility.loading' | t }}
       </p>
+
+      
     </form>
   </div>
 </cart-items>
